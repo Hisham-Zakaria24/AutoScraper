@@ -1,0 +1,15 @@
+{
+  "name": "Quotes (practice site)",
+  "url": "https://quotes.toscrape.com/",
+  "item_selector": "div.quote",
+  "fields": {
+    "quote": "span.text",
+    "author": "small.author",
+    "author_link": "span a@href"
+  },
+  "next_selector": "li.next a",
+  "max_pages": 3,
+  "delay": 1,
+  "interval_minutes": 0,
+  "respect_robots": true
+}

@@ -1,0 +1,102 @@
+<!doctype html>
+<!-- AutoScraper | Made by Hisham-Zakaria -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Hisham-Zakaria">
+  <title>AutoScraper</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header>
+    <div>
+      <h1><span class="logo">&lt;/&gt;</span> AutoScraper</h1>
+      <p>Automated web scraping dashboard</p>
+    </div>
+    <span class="owner">Made by <b>Hisham-Zakaria</b></span>
+  </header>
+
+  <section class="stats">
+    <div><b id="sJobs">0</b><span>Total jobs</span></div>
+    <div><b id="sItems">0</b><span>Saved items</span></div>
+    <div><b id="sSched">0</b><span>Scheduled</span></div>
+    <div><b id="sRun">0</b><span>Running now</span></div>
+  </section>
+
+  <main>
+    <aside class="card">
+      <div class="row between">
+        <h2>Jobs</h2>
+        <button id="newBtn" class="primary">+ New job</button>
+      </div>
+      <ul id="jobList"></ul>
+    </aside>
+
+    <section class="content">
+      <form id="jobForm" class="card">
+        <h2 id="formTitle">New job</h2>
+        <div class="grid">
+          <label>Job name<input name="name" required placeholder="Quotes"></label>
+          <label>Start URL<input name="url" type="url" required placeholder="https://quotes.toscrape.com/"></label>
+          <label>Item selector (har record ka box)<input name="item_selector" required placeholder="div.quote"></label>
+          <label>Next page selector (optional)<input name="next_selector" placeholder="li.next a"></label>
+        </div>
+        <h3>Fields</h3>
+        <p class="hint">Text ke liye <code>h2 a</code>, attribute ke liye <code>h2 a@href</code> ya <code>img@src</code>. Sirf <code>@href</code> se item ka apna attribute milega.</p>
+        <div id="fields"></div>
+        <button type="button" id="addField">+ Add field</button>
+        <div class="grid three">
+          <label>Max pages<input name="max_pages" type="number" min="1" max="50" value="1"></label>
+          <label>Delay (seconds)<input name="delay" type="number" min="0.5" max="60" step="0.5" value="1"></label>
+          <label>Auto-run har X minute (0 = off)<input name="interval_minutes" type="number" min="0" max="10080" value="0"></label>
+        </div>
+        <label class="check"><input name="respect_robots" type="checkbox" checked> robots.txt follow karein</label>
+        <div class="row">
+          <button class="primary">Save job</button>
+          <button type="button" id="previewBtn">Test selectors</button>
+          <button type="button" id="exampleBtn">Load example</button>
+        </div>
+      </form>
+
+      <div id="previewCard" class="card" hidden>
+        <h2 id="previewTitle">Preview</h2>
+        <div class="table-wrap"><table id="previewTable"></table></div>
+      </div>
+
+      <div id="detail" hidden>
+        <div class="card">
+          <div class="row between">
+            <h2 id="detailName"></h2>
+            <div class="row">
+              <button id="runBtn" class="primary">▶ Run now</button>
+              <button id="delBtn" class="danger">Delete job</button>
+            </div>
+          </div>
+          <div class="row between">
+            <input id="search" type="search" placeholder="Data search karein...">
+            <div class="row">
+              <a class="btn" data-fmt="csv">CSV</a>
+              <a class="btn" data-fmt="json">JSON</a>
+              <a class="btn" data-fmt="xlsx">Excel</a>
+              <button id="clearBtn" class="danger">Clear data</button>
+            </div>
+          </div>
+          <div class="table-wrap"><table id="dataTable"></table></div>
+          <div class="row between">
+            <button id="prev">← Prev</button><span id="pageInfo"></span><button id="next">Next →</button>
+          </div>
+        </div>
+        <div class="card">
+          <h2>Run history</h2>
+          <div class="table-wrap"><table id="runTable"></table></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>AutoScraper v1.0 · © 2026 <b>Hisham-Zakaria</b></footer>
+  <div id="toast" role="status"></div>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
