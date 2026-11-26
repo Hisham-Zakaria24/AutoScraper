@@ -1,4 +1,4 @@
-"""Web dashboard. Run: python app.py  |  Made by Hisham-Zakaria."""
+""Web dashboard. Run: python app.py  |  Made by Hisham-Zakaria.""
 import os
 from pathlib import Path
 from urllib.parse import urlsplit
